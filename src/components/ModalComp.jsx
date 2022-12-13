@@ -51,7 +51,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
         return (
             <>
                 <Modal isOpen={isOpen} onClose={onClose}>
-                    <ModalOVerlay/>
+                    <ModalOverlay/>
                     <ModalContent>
                         <ModalHeader>Cadastro de Clientes</ModalHeader>
                         <ModalCloseButton />

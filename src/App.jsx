@@ -3,7 +3,7 @@ import {
   Box,
   Flex,
   Button,
-  useDisclousure,
+  useDisclosure,
   Table,
   Thead,
   Tr,
@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import ModalComp from "./components/ModalComp";
 
 const App = () => {
-  const { isOpen, onOpen, onClose } = useDisclousure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setData] = useState([]);
   const [dataEdit, setDataEdit] = useState({});
 
@@ -27,7 +27,7 @@ const App = () => {
 
   useEffect(() => {
     const db_costumer = localStorage.getItem("cad_cliente")
-      ? JASON.parse(localStorage.getItem("cad_cliente"))
+      ? JSON.parse(localStorage.getItem("cad_cliente"))
       : [];
 
       setData(db_costumer);
@@ -38,7 +38,7 @@ const App = () => {
 
     setData(newArray);
 
-    localStorage.setItem("cad_cliente", JASON.stringify(newArray));
+    localStorage.setItem("cad_cliente", JSON.stringify(newArray));
    };
    
   return (
@@ -69,6 +69,15 @@ const App = () => {
               </Tr>
             </Thead>
             <Tbody>
+              {data.length === 0 &&
+                <Tr>
+                  <Td colSpan="2">
+                    <h2 style={{textAlign:"center"}}>
+                      Nenhum usuário cadastrado.
+                    </h2>
+                  </Td>
+                </Tr> 
+              }
               {data.map(({ name, email }, index) => (
                 <Tr key={index} cursor="pointer" _houver={{ bg: "gray.100"}}>
                   <Td maxW={isMobile ? 5 : 100}>{name}</Td>
